@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern ID Card Creator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>ID Card Generator</h1>
+            <p>Input your details below to generate a professional digital ID card instantly.</p>
+        </header>
+
+        <main class="main-content">
+            <section class="form-section">
+                <form id="idForm" autocomplete="off">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+1 (555) 000-0000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" rows="2" placeholder="123 Modern St, Tech City" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="aadharNumber">Aadhaar Number</label>
+                            <input type="text" id="aadharNumber" placeholder="XXXX-XXXX-XXXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="panNumber">PAN Number</label>
+                            <input type="text" id="panNumber" placeholder="ABCDE1234F" style="text-transform: uppercase;" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photoUpload" class="file-upload-label">
+                            <span class="upload-icon">📷</span>
+                            <span id="uploadText">Upload Profile Photo</span>
+                        </label>
+                        <input type="file" id="photoUpload" accept="image/*" required>
+                    </div>
+
+                    <button type="submit" class="btn-generate">Generate ID Card</button>
+                </form>
+            </section>
+
+            <section class="preview-section">
+                <div class="id-card-wrapper">
+                    <div class="id-card" id="idCard">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <div class="logo-icon"></div>
+                                <span>IDENTIX CORP</span>
+                            </div>
+                            <span class="card-badge">VERIFIED</span>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="photo-area">
+                                <img id="cardPhoto" src="https://via.placeholder.com/150" alt="Profile Photo">
+                            </div>
+                            <div class="details-area">
+                                <h2 id="cardName">Identity Card</h2>
+                                <p class="designation">Permanent Resident / Employee</p>
+                                
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <span class="label">Phone:</span>
+                                        <span class="value" id="cardPhone">—</span>
+                                    </div>
+                                    <div class="info-item full-width">
+                                        <span class="label">Address:</span>
+                                        <span class="value" id="cardAddress">—</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="label">Aadhaar No:</span>
+                                        <span class="value" id="cardAadhar">—</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="label">PAN No:</span>
+                                        <span class="value" id="cardPan">—</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="barcode">
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                            <span class="serial-no">ID-99284A</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="printBtn" class="btn-secondary" disabled>Download / Print ID</button>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
