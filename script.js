@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardPhoto = document.getElementById('cardPhoto');
 
     let uploadedImageBase64 = '';
+    let globalFirstName = 'User'; // Used for naming the downloaded file
 
     // Track Image upload and change label text / preview
     photoUpload.addEventListener('change', (e) => {
@@ -40,6 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const aadharNumber = document.getElementById('aadharNumber').value.trim();
         const panNumber = document.getElementById('panNumber').value.trim().toUpperCase();
 
+        globalFirstName = firstName; // Save for download filename
+
         // Update ID Card Text nodes
         cardName.textContent = `${firstName} ${lastName}`;
         cardPhone.textContent = phone;
@@ -52,8 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
             cardPhoto.src = uploadedImageBase64;
         }
 
-        // Enable the Download/Print Feature button
+        // Enable the Download Feature button
         printBtn.removeAttribute('disabled');
+        printBtn.textContent = "Download ID Card (PNG)";
 
         // Add a subtle generation effect animation to the card
         const idCard = document.getElementById('idCard');
@@ -63,8 +67,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 
-    // Optional Print Functionality
+    // Download Card as PNG Image Functionality
     printBtn.addEventListener('click', () => {
-        window.print();
+        const idCardElement = document.getElementById('idCard');
+        
+        // Options to ensure maximum crispness and quality
+        const options = {
+            scale: 2, // Doubles resolution for crisp text renders
+            useCORS: true, // Permits rendering loaded profile images safely
+            backgroundColor: null // Keeps original CSS background design intact
+        };
+
+        // Render the HTML element to a canvas graphic element
+        html2canvas(idCardElement, options).then(canvas => {
+            // Convert canvas rendering to a data URI image resource
+            const imageURI = canvas.toDataURL('image/png');
+            
+            // Create a virtual anchor element to trigger download automatically
+            const downloadLink = document.createElement('a');
+            downloadLink.href = imageURI;
+            downloadLink.download = `${globalFirstName}_ID_Card.png`;
+            
+            // Append link, trigger click event, then cleanup
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        });
     });
 });
